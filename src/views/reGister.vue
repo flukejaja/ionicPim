@@ -92,7 +92,7 @@
               </ion-tex>
             </ino-col>
           </ion-row>
-          <ion-button type="submit" class="sum" color="success"
+          <ion-button type="submit" class="sum" color="success" @click="regsiter"
             >Sign up</ion-button
           >
         </ion-grid>
@@ -116,13 +116,12 @@ import {
 } from "@ionic/vue";
 
 import { defineComponent} from "vue";
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import {db} from '@/firebase/firebaseinit'
-
+import {db} from '../firebase/firebaseinit'
+import { collection, addDoc ,doc } from "firebase/firestore"; 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 export default defineComponent({
-
   name: "reGister",
+  
   components: {
     IonInput,
     IonItem,
@@ -145,22 +144,20 @@ export default defineComponent({
   },
   methods:{
     async regsiter(){
-       const firebaseAuth = await firebase.auth()
-       const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email , this.password)
-       const result = await createUser
-       const dataBase = db.collection('users').doc(result.user.uid)
-       await dataBase.set({
-        firstname:this.firstname,
+       const auth = getAuth();
+       await createUserWithEmailAndPassword(auth, this.email, this.password)
+       const docRef = await addDoc(collection(db, "users"),{
+  firstname:this.firstname,
         lastname:this.lastname,
         username:this.username,
         password:this.password,
         email:this.email,
-
-       })
+});console.log("Success id = "+docRef);
        this.$router.push({path:'/'})
-    }
-  }
+    },
+  },
 });
+
 </script>
 <style>
 .text {

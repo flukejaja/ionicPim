@@ -1,15 +1,24 @@
-import * as firebase from 'firebase/app'
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from 'firebase/firestore'
+// import firebase from 'firebase/compat/app';
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-import { getFirestore } from 'firebase/firestore';
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBDuIVmTNehl7wvpl4M4M7Lk5vaKsx4GUA",
+  authDomain: "dddja-19ca2.firebaseapp.com",
+  projectId: "dddja-19ca2",
+  storageBucket: "dddja-19ca2.appspot.com",
+  messagingSenderId: "987326284046",
+  appId: "1:987326284046:web:7db6523b9033b22f22175f",
+  measurementId: "G-PNSK2ZPB96"
+};
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAlA8KhGYSe7zaexrlW1EnZRqmGGpfNdyA",
-    authDomain: "pimionic.firebaseapp.com",
-    projectId: "pimionic",
-    storageBucket: "pimionic.appspot.com",
-    messagingSenderId: "783278446426",
-    appId: "1:783278446426:web:c8ee329c870f0abc9f0563"
-  };
+// Initialize Firebase
 
-  const firebaseApp = firebase.initializeApp(firebaseConfig)
-  export const db = getFirestore(firebaseApp);
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
